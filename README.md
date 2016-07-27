@@ -1,16 +1,18 @@
 formula
 =======
 
-formula is a simple arithmetic expression evaluator. It accepts a
-string as input and evaluate the math expression *safely* (i.e.
-without using `eval`).
+Formula is a simple arithmetic expression evaluator written in Python.
+The main goal of this library is to provide a safe way to evaluate
+basic math expressions given in string form.
 
 Features
 --------
 
 * Support basic operators:
-    * add (+), subtract (-), multiply (\*), divide (/)
-    * ... and parenthesis "()" for denoting precedence.
+
+    * add (`+`), subtract (`-`), multiply (`*`), divide (`/`)
+    * ... and parenthesis `()` for denoting precedence.
+
 * Support "variables" (see 'How to use' below)
 * Support both Python 2.7 and Python 3.3 (or later)
 * NOT support unary operators.
