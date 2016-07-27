@@ -29,7 +29,7 @@ Clone the repository and run setup.py:
 How to use
 ----------
 
-Just pass a string to evaluate to the `safe_eval()` function:
+Just pass a string to the `safe_eval()` function:
 
 ```python
 >>> import formula
@@ -50,9 +50,53 @@ Also we can embed variables using `namespace` parameter:
 1.3333333333333333
 ```
 
+Implementation Background
+-------------------------
+
+This library was originally developed to provide a "custom index"
+feature.
+
+Suppose you're developing a dashboard web app, and a user feeds a
+tabular data like this (which is then saved to the data store):
+
+```python
+>>> dataset
+{'2015-06-01': {'price': 100, 'quantity': 200},
+ '2015-06-02': {'price': 150, 'quantity': 300},
+ '2015-06-03': {'price': 200, 'quantity': 400}]
+```
+
+Now it is a trivial task to display these values as a table, but often
+users want more. For example, they might think it is very helpful if
+'unit price' is calculated automatically and displayed in the table.
+Of course, you can implement a some special logic for this case ...
+then you find yourself in a whack-a-mole situation. This approach
+does not scale well for a large user base.
+
+Instead, you can allow users to 'compose' a custom index through an
+input dialog like this:
+
+```
+Add a custome column to the table?
+
+  title:   [UnitPrice       ]
+  formula: [price / quantity]
+
+[OK] [CANCEL]
+```
+
+Then you can use the `formula` library to evaluate them:
+
+```python
+>>> import formula
+>>> for date, values in dataset.items():
+...   values[title] = formula.safe_eval(expression, namespace=values)
+```
+
+
 TODO
 ----
 
-* Support more operators (like exponents "^").
+* Support more operators (like exponents `^`).
 * Support unary minus for negative numbers.
 * Memoize `_tokenize()` and `_parse()`
