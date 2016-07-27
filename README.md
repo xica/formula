@@ -2,8 +2,11 @@ formula
 =======
 
 Formula is a simple arithmetic expression evaluator written in Python.
-The main goal of this library is to provide a safe way to evaluate
+The main goal of this library is to provide a safer way to evaluate
 basic math expressions given in string form.
+
+Internally, it implements a (simplified) version of Dijkstra's "shunting-
+yard algorithm".
 
 Features
 --------
@@ -56,14 +59,14 @@ Implementation Background
 This library was originally developed to provide a "custom index"
 feature.
 
-Suppose you're developing a dashboard web app, and a user feeds a
-tabular data like this (which is then saved to the data store):
+Suppose you're developing a dashboard application, and a user feeds
+a tabular data like this:
 
 ```python
 >>> dataset
 {'2015-06-01': {'price': 100, 'quantity': 200},
  '2015-06-02': {'price': 150, 'quantity': 300},
- '2015-06-03': {'price': 200, 'quantity': 400}]
+ '2015-06-03': {'price': 200, 'quantity': 400}}
 ```
 
 Now it is a trivial task to display these values as a table, but often
@@ -80,7 +83,7 @@ input dialog like this:
 Add a custome column to the table?
 
   title:   [UnitPrice       ]
-  formula: [price / quantity]
+  formula: [price / quantity] (max 25 chars)
 
 [OK] [CANCEL]
 ```
@@ -97,6 +100,5 @@ Then you can use the `formula` library to evaluate them:
 TODO
 ----
 
-* Support more operators (like exponents `^`).
 * Support unary minus for negative numbers.
 * Memoize `_tokenize()` and `_parse()`
