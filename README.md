@@ -53,14 +53,26 @@ Also we can embed variables using `namespace` parameter:
 1.3333333333333333
 ```
 
+Security Notice
+---------------
+
+Right now, this library itself does NOT prevent DOS attacks. It's "safe" in
+a sense that it does not allow arbitrary code execution (like `eval()`).
+However, it is still possible that your user inputs a long expression that
+takes long time to finish.
+
+Whether (and how much) it is problematic depends largely on your context,
+and if so, you may mitigate it by imposing some reasonable limits.
+
+
 Implementation Background
 -------------------------
 
 This library was originally developed to provide a "custom index"
 feature.
 
-Suppose you're developing a dashboard application, and a user feeds
-a tabular data like this:
+Suppose you're developing a business intelligence application, and your
+customer feeds a tabular data like this:
 
 ```python
 >>> dataset
@@ -70,20 +82,20 @@ a tabular data like this:
 ```
 
 Now it is a trivial task to display these values as a table, but often
-users want more. For example, they might think it is very helpful if
+customers want more. For example, they might think it is very helpful if
 'unit price' is calculated automatically and displayed in the table.
 Of course, you can implement a some special logic for this case ...
 then you find yourself in a whack-a-mole situation. This approach
-does not scale well for a large user base.
+does not scale well.
 
-Instead, you can allow users to 'compose' a custom index through an
+Instead, you can allow customers to 'compose' a custom index through an
 input dialog like this:
 
 ```
 Add a custome column to the table?
 
   title:   [UnitPrice       ]
-  formula: [price / quantity] (max 25 chars)
+  formula: [price / quantity]
 
 [OK] [CANCEL]
 ```
