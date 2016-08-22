@@ -112,31 +112,38 @@ def _parse(tokens):
 #
 # Entry point
 
-def safe_eval(string, namespace=None):
-    """Evaluate an arithmetic expression given as `string`.
+class Formula:
 
-    >>> import formula
-    >>> formula.safe_eval('(A + 1) * 100', namespace={'A': 5'})
-    600
-    """
-    if namespace is None:
-        namespace = {}
+    def __init__(self, expr):
+        self.expr = expr
+        self.parsed = _parse(_tokenize(expr))
 
-    stack = []
-    for token in _parse(_tokenize(string)):
-        # Evaluate an expression in reverse Polish notation.
-        if token in namespace:
-            stack.append(namespace[token])
-        elif is_float(token):
-            stack.append(float(token))
-        elif token in OPERATORS:
-            arg2 = stack.pop()
-            arg1 = stack.pop()
-            stack.append(OPERATORS[token](arg1, arg2))
-        else:
-            raise ValueError('unknown token: %s' % token)
+    def safe_eval(self, namespace=None):
+        """Evaluate an arithmetic expression using `namespace`.
 
-    if len(stack) != 1:
-        raise ValueError('invalid formula: %s' % string)
+        >>> from formula import Formula
+        >>> formula = Formula('(A + 1) * 100')
+        >>> formula.safe_eval({'A': 5'})
+        600
+        """
+        if namespace is None:
+            namespace = {}
 
-    return stack.pop()
+        stack = []
+        for token in self.parsed:
+            # Evaluate an expression in reverse Polish notation.
+            if token in namespace:
+                stack.append(namespace[token])
+            elif is_float(token):
+                stack.append(float(token))
+            elif token in OPERATORS:
+                arg2 = stack.pop()
+                arg1 = stack.pop()
+                stack.append(OPERATORS[token](arg1, arg2))
+            else:
+                raise ValueError('unknown token: %s' % token)
+
+        if len(stack) != 1:
+            raise ValueError('invalid formula: %s' % self.expr)
+
+        return stack.pop()
