@@ -17,7 +17,7 @@ class TestFormula(unittest.TestCase):
             ('((A+1)-B)',  ('(', '(',  'A', '+', '1', ')', '-', 'B', ')')),
         ]
         for string, result in data:
-            self.assertEqual(_tokenize(string), result)
+            self.assertEqual(Formula.tokenize(string), result)
 
     def test_parse(self):
         data = [
@@ -30,7 +30,7 @@ class TestFormula(unittest.TestCase):
             (('10', '/', '(', '1.0', '-', '0.5', ')'), ('10', '1.0', '0.5', '-', '/'))
         ]
         for tokens, result in data:
-            self.assertEqual(_parse(tokens), result)
+            self.assertEqual(Formula.parse(tokens), result)
 
     def test_safe_eval(self):
         data = [
