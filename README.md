@@ -29,6 +29,10 @@ Clone the repository and run setup.py:
     $ cd formula
     $ python setup.py install
 
+Or you can install this library using pip:
+
+    $ pip install git+https://github.com/xica/formula
+
 How to use
 ----------
 
