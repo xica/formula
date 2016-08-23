@@ -8,6 +8,7 @@ setup(
     author_email='info@xica.net',
     url='https://github.com/xica/formula',
     description='Safe arithmetic expression evaluator',
+    license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
