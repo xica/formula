@@ -48,11 +48,11 @@ Here is a simple example how to use it:
 nan
 ```
 
-We can embed variables using `namespace` parameter:
+Also, we can embed variables using `namespace` parameter:
 
 ```python
 >>> formula = Formula('mile * 1.609')
->>> formula.safe_eval({'mile': 3})
+>>> formula.safe_eval(namespace={'mile': 3})
 4.827
 >>> formula = Formula('(x2-x1)/t')
 >>> formula.safe_eval({'x1': 1, 'x2': 5, 't': 3})
@@ -71,8 +71,8 @@ Whether (and how much) it is problematic depends largely on your context,
 and if so, you may mitigate it by imposing some reasonable limits.
 
 
-Implementation Background
--------------------------
+Why we developed this library
+-----------------------------
 
 This library was originally developed to provide a "custom index"
 feature.
@@ -111,9 +111,8 @@ Then you can use the `formula` library to evaluate them:
 ```python
 >>> from formula import Formula
 >>> fm = Formula(expr)
->>> res = {}
 >>> for date, values in dataset.items():
-...   res[date] = fm.safe_eval(values)
+...   values[title] = fm.safe_eval(values)
 ```
 
 
@@ -121,4 +120,3 @@ TODO
 ----
 
 * Support unary minus for negative numbers.
-* Memoize `_tokenize()` and `_parse()`
