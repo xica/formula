@@ -3,7 +3,7 @@
 import math
 import unittest
 
-from formula import _tokenize, _parse, Formula
+from formula import Formula
 
 
 class TestFormula(unittest.TestCase):
