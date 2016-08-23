@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='formula',
-    version='0.1.0',
+    version='0.2.0',
     py_modules=['formula'],
     author='XICA.inc',
     author_email='info@xica.net',
