@@ -32,24 +32,26 @@ Clone the repository and run setup.py:
 How to use
 ----------
 
-Just pass a string to the `safe_eval()` function:
+Here is a simple example how to use it:
 
 ```python
->>> import formula
->>> formula.safe_eval('7 * 2.5')
+>>> from formula import Formula
+>>> Formula('7 * 2.5').safe_eval()
 17.5
->>> formula.safe_eval('(5 + 10) / 3')
+>>> Formula('(5 + 10) / 3').safe_eval()
 5.0
->>> formula.safe_eval('1 / 0')
+>>> Formula('1 / 0').safe_eval()
 nan
 ```
 
-Also we can embed variables using `namespace` parameter:
+We can embed variables using `namespace` parameter:
 
 ```python
->>> formula.safe_eval('mile * 1.609', namespace={'mile': 3})
+>>> formula = Formula('mile * 1.609')
+>>> formula.safe_eval({'mile': 3})
 4.827
->>> formula.safe_eval('(x2-x1)/t', {'x1': 1, 'x2': 5, 't': 3})
+>>> formula = Formula('(x2-x1)/t')
+>>> formula.safe_eval({'x1': 1, 'x2': 5, 't': 3})
 1.3333333333333333
 ```
 
@@ -103,9 +105,11 @@ Add a custome column to the table?
 Then you can use the `formula` library to evaluate them:
 
 ```python
->>> import formula
+>>> from formula import Formula
+>>> fm = Formula(expr)
+>>> res = {}
 >>> for date, values in dataset.items():
-...   values[title] = formula.safe_eval(expression, namespace=values)
+...   res[date] = fm.safe_eval(values)
 ```
 
 
