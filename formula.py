@@ -88,7 +88,7 @@ class Formula:
     def tokenize(string):
         """Split `string` into tokens.
 
-        >>> _tokenize('A / (10 - B)')
+        >>> Formula.tokenize('A / (10 - B)')
         ['A', '/', '(', '10', '-', 'B', ')']
         """
         tokens = []
@@ -109,7 +109,7 @@ class Formula:
     def parse(tokens):
         """Convert a list of tokens to reverse Polish notation.
 
-        >>> _parse(['A', '/', '(', '10', '-', 'B', ')'])
+        >>> Formula.parse(['A', '/', '(', '10', '-', 'B', ')'])
         ['A', '10', 'B', '-', '/']
         """
         queue = []
