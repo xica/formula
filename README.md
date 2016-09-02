@@ -3,7 +3,7 @@ formula
 
 Formula is a simple arithmetic expression evaluator written in Python.
 The main goal of this library is to provide a safer way to evaluate
-basic math expressions given in string form.
+basic math expressions given in a string form.
 
 Internally, it implements a (simplified) version of Dijkstra's "shunting-
 yard algorithm".
@@ -17,8 +17,8 @@ Features
     * ... and parenthesis `()` for denoting precedence.
 
 * Support "variables" (see 'How to use' below)
-* Support both Python 2.7 and Python 3.3 (or later)
 * NOT support unary operators.
+* Support both Python 2.7 and Python 3.3 (or later)
 
 How to install
 --------------
@@ -58,18 +58,6 @@ Also, we can embed variables using `namespace` parameter:
 >>> formula.safe_eval({'x1': 1, 'x2': 5, 't': 3})
 1.3333333333333333
 ```
-
-Security Notice
----------------
-
-Right now, this library itself does NOT prevent DOS attacks. It's "safe" in
-a sense that it does not allow arbitrary code execution (like `eval()`).
-However, it is still possible that your user inputs a long expression that
-takes long time to finish.
-
-Whether (and how much) it is problematic depends largely on your context,
-and if so, you may mitigate it by imposing some reasonable limits.
-
 
 Why we developed this library
 -----------------------------
@@ -115,6 +103,11 @@ Then you can use the `formula` library to evaluate them:
 ...   values[title] = fm.safe_eval(values)
 ```
 
+
+LICENSE
+-------
+
+MIT License
 
 TODO
 ----
